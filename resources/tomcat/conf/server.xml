@@ -25,29 +25,6 @@
             <Valve className="com.gopivotal.cloudfoundry.tomcat.logging.access.CloudFoundryAccessLoggingValve"
                    pattern='[ACCESS] %{org.apache.catalina.AccessLog.RemoteAddr}r %l %t %D %F %B %S vcap_request_id:%{X-Vcap-Request-Id}i'
                    enabled="${access.logging.enabled}"/>
-            
-          <!--  <Realm className="org.apache.catalina.realm.LockOutRealm">
-              <Realm className="org.apache.catalina.realm.JNDIRealm"
-	    	       connectionURL="${LDAP_URL}"
-	    	       connectionName="cn=root"
-	    	       connectionPassword="${LDAP_PASSWORD}"
-	    	       userBase="o=MEDAVIE,DC=CA"
-	    	       userSearch="(uid={0})"
-	    	       userSubtree="true"
-	    	       roleBase="ou=Groups,o=MEDAVIE,DC=CA"
-	    	       roleSubtree="true"
-	    	       roleSearch="(member={0})"
-	                   roleName="cn">
-              </Realm>
-            </Realm>
-        
-             <Valve className="com.ibm.tivoli.integration.am.catalina.valves.AMTomcatValve" 
-	    	    	                   debugTrace="true"
-	    	    	                   groupsHeader="iv-groups"
-	    	    	                   userHeader="iv-user"
-	    	    	                   secretPassword="${SECRET_PASSWORD}"
-                           addRoles="AMTomcatAuthenticated"/>
-                           -->
                            
             <Host name='localhost'>
                 <Listener className="com.gopivotal.cloudfoundry.tomcat.lifecycle.ApplicationStartupFailureDetectingLifecycleListener"/>
