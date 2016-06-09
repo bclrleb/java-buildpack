@@ -26,7 +26,8 @@
                    pattern='[ACCESS] %{org.apache.catalina.AccessLog.RemoteAddr}r %l %t %D %F %B %S vcap_request_id:%{X-Vcap-Request-Id}i'
                    enabled="${access.logging.enabled}"/>
             
-            <Realm className="org.apache.catalina.realm.JNDIRealm"
+            <Realm className="org.apache.catalina.realm.LockOutRealm">
+              <Realm className="org.apache.catalina.realm.JNDIRealm"
 	    	       connectionURL="${LDAP_URL}"
 	    	       connectionName="cn=root"
 	    	       connectionPassword="${LDAP_PASSWORD}"
@@ -37,14 +38,15 @@
 	    	       roleSubtree="true"
 	    	       roleSearch="(member={0})"
 	                   roleName="cn">
+              </Realm>
             </Realm>
         
-            <!-- <Valve className="com.ibm.tivoli.integration.am.catalina.valves.AMTomcatValve" 
+             <Valve className="com.ibm.tivoli.integration.am.catalina.valves.AMTomcatValve" 
 	    	    	                   debugTrace="true"
 	    	    	                   groupsHeader="iv-groups"
 	    	    	                   userHeader="iv-user"
-	    	    	                   secretPassword="cGFzc3dvcmQ="
-                           addRoles="AMTomcatAuthenticated"/> -->
+	    	    	                   secretPassword="${SECRET_PASSWORD}"
+                           addRoles="AMTomcatAuthenticated"/>
                            
             <Host name='localhost'>
                 <Listener className="com.gopivotal.cloudfoundry.tomcat.lifecycle.ApplicationStartupFailureDetectingLifecycleListener"/>
